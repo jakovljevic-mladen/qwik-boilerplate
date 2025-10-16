@@ -23,7 +23,9 @@ errorOnDuplicatesPkgDeps(devDependencies, dependencies);
 export default defineConfig(({ command, mode }): UserConfig => {
   return {
     plugins: [
-      qwikCity(),
+      qwikCity({
+        trailingSlash: false,
+      }),
       qwikVite(),
       tsconfigPaths({ root: '.' }),
       tailwindcss(),
