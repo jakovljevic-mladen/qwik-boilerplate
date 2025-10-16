@@ -10,8 +10,8 @@ import pkg from './package.json';
 import tailwindcss from '@tailwindcss/vite';
 
 type PkgDep = Record<string, string>;
-const { dependencies = {}, devDependencies = {} } = pkg as any as {
-  dependencies: PkgDep;
+const { dependencies = {}, devDependencies = {} } = pkg as {
+  dependencies?: PkgDep;
   devDependencies: PkgDep;
   [key: string]: unknown;
 };
@@ -38,7 +38,7 @@ export default defineConfig(({ command, mode }): UserConfig => {
      * This is an advanced setting. It improves the bundling of your server code. To use it, make sure you understand when your consumed packages are dependencies or dev dependencies. (otherwise things will break in production)
      */
     // ssr:
-    //   command === "build" && mode === "production"
+    //   command === 'build' && mode === 'production'
     //     ? {
     //         // All dev dependencies should be bundled in the server build
     //         noExternal: Object.keys(devDependencies),

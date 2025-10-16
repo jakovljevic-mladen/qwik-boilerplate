@@ -1,4 +1,4 @@
-import { Config } from "prettier";
+import type { Config } from 'prettier';
 
 const config: Config = {
   plugins: ['prettier-plugin-tailwindcss'],
@@ -8,7 +8,7 @@ const config: Config = {
   endOfLine: 'auto',
   trailingComma: 'all',
   bracketSameLine: true,
-  arrowParens: 'avoid'
+  arrowParens: 'avoid',
 };
 
 export default config;
