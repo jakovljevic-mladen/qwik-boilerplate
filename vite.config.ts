@@ -2,7 +2,7 @@
  * This is the base config for vite.
  * When building, the adapter config is used which loads this file and extends it.
  */
-import { defineConfig, type UserConfig } from 'vite';
+import { defineConfig } from 'vite';
 import { qwikVite } from '@builder.io/qwik/optimizer';
 import { qwikCity } from '@builder.io/qwik-city/vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
@@ -20,8 +20,9 @@ errorOnDuplicatesPkgDeps(devDependencies, dependencies);
  * Note that Vite normally starts from `index.html` but the qwikCity plugin makes start at `src/entry.ssr.tsx` instead.
  */
 
-export default defineConfig(({ command, mode }): UserConfig => {
-  return {
+export default defineConfig(
+  // ({ command, mode }): UserConfig => ({
+  () => ({
     plugins: [
       qwikCity({
         trailingSlash: false,
@@ -34,7 +35,11 @@ export default defineConfig(({ command, mode }): UserConfig => {
     optimizeDeps: {
       // Put problematic deps that break bundling here, mostly those with binaries.
       // For example ['better-sqlite3'] if you use that in server functions.
-      exclude: [],
+      exclude: ['@prisma/client', '@prisma/client', 'prisma'],
+      include: ['@auth/qwik'],
+    },
+    ssr: {
+      noExternal: ['@prisma/client', '@prisma/client', 'prisma'],
     },
     /**
      * This is an advanced setting. It improves the bundling of your server code. To use it, make sure you understand when your consumed packages are dependencies or dev dependencies. (otherwise things will break in production)
@@ -57,6 +62,7 @@ export default defineConfig(({ command, mode }): UserConfig => {
         // Don't cache the server response in dev mode
         'Cache-Control': 'public, max-age=0',
       },
+      port: 5174,
     },
     preview: {
       headers: {
@@ -64,8 +70,8 @@ export default defineConfig(({ command, mode }): UserConfig => {
         'Cache-Control': 'public, max-age=600',
       },
     },
-  };
-});
+  }),
+);
 
 // *** utils ***
 /**
@@ -77,7 +83,7 @@ function errorOnDuplicatesPkgDeps(
   devDependencies: PkgDep,
   dependencies: PkgDep,
 ) {
-  let msg = '';
+  let msg: string;
   // Create an array 'duplicateDeps' by filtering devDependencies.
   // If a dependency also exists in dependencies, it is considered a duplicate.
   const duplicateDeps = Object.keys(devDependencies).filter(
