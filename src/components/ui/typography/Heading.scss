@@ -1,0 +1,31 @@
+.heading {
+  color: var(--text-color);
+  max-width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+
+  &--size {
+    @for $i from 1 through 6 {
+      &-#{$i} {
+        font: var(--h-#{$i});
+      }
+    }
+  }
+
+  &--bold {
+    font-weight: 700;
+  }
+
+  &--regular {
+    font-weight: 500;
+  }
+
+  &--align {
+    @each $dir in left, center, right {
+      &-#{$dir} {
+        text-align: #{$dir};
+      }
+    }
+  }
+}

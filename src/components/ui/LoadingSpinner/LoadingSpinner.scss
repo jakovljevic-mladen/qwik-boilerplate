@@ -1,0 +1,38 @@
+.spinner {
+  svg {
+    animation: rotate 2s linear infinite;
+    width: 2rem;
+    height: 2rem;
+
+    circle {
+      stroke: var(--gs-700);
+      stroke-linecap: round;
+      stroke-width: 4px;
+      animation: dash 1.5s ease-in-out infinite;
+    }
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
+  }
+}

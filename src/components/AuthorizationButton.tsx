@@ -1,5 +1,6 @@
 import { component$ } from '@builder.io/qwik';
 import { useSessionLoader, useSignInAction, useSignOutAction } from '~/routes/plugin@auth';
+import Button from '~/components/ui/Button/Button';
 
 export default component$(() => {
   const session = useSessionLoader();
@@ -7,7 +8,7 @@ export default component$(() => {
   const signOut = useSignOutAction();
 
   return (
-    <button
+    <Button
       onClick$={() => {
         if (session.value) {
           signOut.submit({ redirectTo: '/' });
@@ -16,6 +17,6 @@ export default component$(() => {
         }
       }}>
       {session.value ? 'Logout' : 'Login'}
-    </button>
+    </Button>
   );
 });

@@ -1,0 +1,62 @@
+@use '/src/assets/scss/_mixins' as *;
+@use '/src/assets/scss/_variables' as *;
+
+.column {
+  box-sizing: border-box;
+
+  &--grow {
+    flex-grow: 1;
+  }
+
+  @for $i from 1 to 13 {
+    &--#{$i} {
+      flex-basis: calc($i/12 * 100%);
+      max-width: calc($i/12 * 100%);
+    }
+  }
+
+  @include breakpoint('sm') {
+    @for $i from 1 to 13 {
+      &--sm-#{$i} {
+        flex-basis: calc($i/12 * 100%);
+        max-width: calc($i/12 * 100%);
+      }
+    }
+  }
+
+  @include breakpoint('md') {
+    @for $i from 1 to 13 {
+      &--md-#{$i} {
+        flex-basis: calc($i/12 * 100%);
+        max-width: calc($i/12 * 100%);
+      }
+    }
+  }
+
+  @include breakpoint('lg') {
+    @for $i from 1 to 13 {
+      &--lg-#{$i} {
+        flex-basis: calc($i/12 * 100%);
+        max-width: calc($i/12 * 100%);
+      }
+    }
+  }
+
+  @include breakpoint('xl') {
+    @for $i from 1 to 13 {
+      &--xl-#{$i} {
+        flex-basis: calc($i/12 * 100%);
+        max-width: calc($i/12 * 100%);
+      }
+    }
+  }
+
+  @each $value in $sizes {
+    @include breakpoint($value) {
+      &--#{$value}-auto {
+        flex-basis: unset;
+        max-width: unset;
+      }
+    }
+  }
+}

@@ -1,0 +1,59 @@
+.paragraph {
+  margin-top: 0;
+  margin-bottom: 1rem;
+
+  max-width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: var(--text-color);
+
+  &--1 {
+    font: var(--p-1);
+  }
+
+  &--2 {
+    font: var(--p-2);
+  }
+
+  &--3 {
+    font: var(--p-3);
+  }
+
+  &--4 {
+    font: var(--p-4);
+  }
+
+  &--thin {
+    font-weight: 200;
+  }
+
+  &--light {
+    font-weight: 400;
+  }
+
+  &--medium {
+    font-weight: 500;
+  }
+
+  &--regular {
+    font-weight: 600;
+  }
+
+  &--bold {
+    font-weight: 700;
+  }
+
+  &--align {
+    &-left {
+      text-align: left;
+    }
+
+    &-center {
+      text-align: center;
+    }
+
+    &-right {
+      text-align: right;
+    }
+  }
+}

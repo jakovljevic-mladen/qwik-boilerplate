@@ -1,0 +1,71 @@
+@use '/src/assets/scss/_mixins' as *;
+@use '/src/assets/scss/_variables' as *;
+
+.row {
+  display: flex;
+  flex-flow: row wrap;
+  min-width: 100%;
+  margin-bottom: 1rem;
+
+  &--no-wrap {
+    flex-wrap: nowrap;
+  }
+
+  @each $name, $value in $spacing {
+    &--gap-#{$name} {
+      gap: $value;
+    }
+  }
+
+  @include breakpoint('sm') {
+    @each $name, $value in $spacing {
+      &--gap-#{$name} {
+        gap: $value * 1.125;
+      }
+    }
+  }
+
+  @include breakpoint('md') {
+    @each $name, $value in $spacing {
+      &--gap-#{$name} {
+        gap: $value * 1.25;
+      }
+    }
+  }
+
+  @include breakpoint('lg') {
+    @each $name, $value in $spacing {
+      &--gap-#{$name} {
+        gap: $value * 1.5;
+      }
+    }
+  }
+
+  @include breakpoint('xl') {
+    @each $name, $value in $spacing {
+      &--gap-#{$name} {
+        gap: $value * 1.75;
+      }
+    }
+  }
+
+  @each $value in $justifyContent {
+    &__justify-#{$value} {
+      justify-content: $value;
+    }
+  }
+
+  @each $value in $alignItems {
+    &__align-#{$value} {
+      align-items: $value;
+    }
+  }
+
+  &--flex-column {
+    flex-direction: column;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}

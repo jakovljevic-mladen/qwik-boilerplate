@@ -1,0 +1,153 @@
+.button {
+  $button: &;
+
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease,
+  color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: var(--p-2);
+  font-weight: 500;
+  padding: 0.25rem 1rem;
+
+  &__icon {
+    height: 20px;
+    width: 20px;
+    max-height: 20px;
+    max-width: 20px;
+    transition: all 0.2s ease;
+
+    &-left {
+      margin-right: 0.5rem;
+    }
+
+    &-right {
+      margin-left: 0.5rem;
+    }
+  }
+
+  &--loading {
+    cursor: progress;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  &:hover:not(#{$button}--loading):not(#{$button}--disabled) {
+    background-color: var(--gs-800);
+  }
+
+  &--primary {
+    background-color: var(--gs-900);
+    color: var(--text-color);
+
+    &:active:not(#{$button}--disabled):not(#{$button}--loading) {
+      background-color: var(--gs-500);
+    }
+  }
+
+  &--secondary {
+    background-color: var(--text-color);
+    border: 1px solid var(--gs-400);
+    color: var(--gs-900);
+
+    &:hover:not(#{$button}--loading):not(#{$button}--disabled) {
+      border-color: var(--gs-900);
+      background-color: var(--text-color);
+    }
+
+    &:active:not(#{$button}--disabled):not(#{$button}--loading) {
+      border-color: var(--gs-600);
+      color: var(--gs-600);
+    }
+  }
+
+  &--transparent {
+    background-color: transparent;
+    border: 1px solid var(--gs-200);
+    color: var(--gs-900);
+
+    &:hover:not(#{$button}--loading):not(#{$button}--disabled) {
+      border-color: var(--gs-900);
+      background-color: transparent;
+    }
+
+    &:active:not(#{$button}--disabled):not(#{$button}--loading) {
+      border-color: var(--gs-600);
+      color: var(--gs-600);
+    }
+  }
+
+  &--link {
+    background-color: transparent;
+    color: var(--gs-900);
+
+    &:hover:not(#{$button}--loading):not(#{$button}--disabled) {
+      background-color: transparent;
+      color: var(--gs-500);
+    }
+
+    &:active:not(#{$button}--disabled):not(#{$button}--loading) {
+      color: var(--gs-300);
+    }
+  }
+
+  &--danger {
+    background-color: var(--r-400);
+    color: var(--white);
+
+    &:hover:not(#{$button}--loading):not(#{$button}--disabled) {
+      background-color: var(--r-300);
+      color: white;
+    }
+  }
+
+  &--large {
+    min-height: 56px;
+    font: var(--p-1);
+  }
+
+  &--medium {
+    min-height: 40px;
+    font: var(--p-2);
+  }
+
+  &--small {
+    min-height: 32px;
+    font: var(--p-3);
+    font-weight: 500;
+  }
+
+  &--full-width {
+    width: 100%;
+  }
+
+  &--no-wrap {
+    white-space: nowrap;
+  }
+
+  &--disabled {
+    cursor: not-allowed;
+    background-color: var(--gs-100);
+    color: var(--gs-300);
+    border: unset;
+
+    &#{$button}--secondary {
+      background-color: white;
+      border: 1px solid var(--gs-300);
+      color: var(--gs-300);
+    }
+
+    &#{$button}--link {
+      background-color: transparent;
+    }
+  }
+
+  &--no-padding {
+    padding: 0;
+    height: unset;
+    min-height: unset;
+  }
+}
