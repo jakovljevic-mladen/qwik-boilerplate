@@ -3,6 +3,7 @@ import { QwikCityProvider, RouterOutlet } from '@builder.io/qwik-city';
 import { RouterHead } from './components/router-head/router-head';
 
 import './global.css';
+import { Toaster } from 'qwik-sonner';
 
 export default component$(() => {
   /**
@@ -21,6 +22,7 @@ export default component$(() => {
       </head>
       <body lang="en">
         <RouterOutlet />
+        <Toaster position="top-right" visibleToasts={1} />
       </body>
     </QwikCityProvider>
   );

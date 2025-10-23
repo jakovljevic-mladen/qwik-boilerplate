@@ -4,6 +4,7 @@ import { ClassList } from '@builder.io/qwik';
 export type IconName =
   | 'three-dots-horizontal'
   | 'three-dots-vertical'
+  | 'x'
   ;
 
 export interface SvgIconProps {

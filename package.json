@@ -43,6 +43,7 @@
     "prettier": "3.6.2",
     "prettier-plugin-tailwindcss": "^0.6.11",
     "prisma": "6.17.1",
+    "qwik-sonner": "^1.0.3",
     "tailwindcss": "^4.1.4",
     "typescript": "5.4.5",
     "typescript-eslint": "8.38.0",

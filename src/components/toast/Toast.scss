@@ -1,0 +1,11 @@
+.content {
+  background-color: var(--background-color);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  width: var(--width); // --width is set in the qwik-sonner (Toaster) package
+  border: 1px solid var(--border-color);
+}
+
+.close {
+  color: var(--text-color);
+}
