@@ -13,6 +13,7 @@ export default component$(() => {
    * Don't remove the `<head>` and `<body>` elements.
    */
 
+  // noinspection HtmlRequiredTitleElement
   return (
     <QwikCityProvider>
       <head>

@@ -23,6 +23,7 @@
     "isolatedModules": true,
     "outDir": "tmp",
     "noEmit": true,
+    "types": ["node", "vite/client"],
     "paths": {
       "~/prisma-client": ["./prisma/client"],
       "~/*": ["./src/*"]
