@@ -1,15 +1,13 @@
-.spinner {
-  svg {
-    animation: rotate 2s linear infinite;
-    width: 2rem;
-    height: 2rem;
+svg.spinner {
+  animation: rotate 2s linear infinite;
+  width: 2rem;
+  height: 2rem;
 
-    circle {
-      stroke: var(--gs-700);
-      stroke-linecap: round;
-      stroke-width: 4px;
-      animation: dash 1.5s ease-in-out infinite;
-    }
+  circle {
+    stroke: var(--gs-700);
+    stroke-linecap: round;
+    stroke-width: 4px;
+    animation: dash 1.5s ease-in-out infinite;
   }
 }
 

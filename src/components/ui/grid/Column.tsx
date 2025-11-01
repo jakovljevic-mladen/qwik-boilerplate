@@ -33,6 +33,7 @@ const Column = component$<ColumnComponent>(
           lg && `column--lg-${lg}`,
           xl && `column--xl-${xl}`,
         ]}
+        data-testid="column"
         ref={ref}>
         <Slot />
       </div>

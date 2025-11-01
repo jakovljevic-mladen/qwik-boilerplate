@@ -27,8 +27,6 @@ build
 .vscode
 .rollup.cache
 tsconfig.tsbuildinfo
-*.spec.tsx
-*.spec.ts
 .netlify
 pnpm-lock.yaml
 package-lock.json

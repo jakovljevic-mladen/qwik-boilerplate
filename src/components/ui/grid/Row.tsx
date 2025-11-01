@@ -62,6 +62,7 @@ const Row = component$<RowComponent>(
           alignItems && `row__align-${alignItems}`,
           column && 'row--flex-column',
         ]}
+        data-testid="row"
         ref={ref}>
         <Slot />
       </div>

@@ -5,11 +5,9 @@ const LoadingSpinner = component$(() => {
   useStyles$(styles);
 
   return (
-    <div class="spinner">
-      <svg viewBox="0 0 50 50">
-        <circle class="circle" cx="25" cy="25" r="20" />
-      </svg>
-    </div>
+    <svg class="spinner" viewBox="0 0 50 50">
+      <circle class="circle" cx="25" cy="25" r="20" />
+    </svg>
   );
 });
 
