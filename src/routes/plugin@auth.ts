@@ -1,29 +1,24 @@
-import { QwikAuth$ } from '@auth/qwik';
-import GitHub from '@auth/qwik/providers/github';
-import { PrismaAdapter } from '@auth/prisma-adapter';
-import { prismaClient } from '~/prisma-client';
+import { BetterAuth$ } from '~/better-auth-adapter';
+import { betterAuth } from 'better-auth';
 import { isServer } from '@builder.io/qwik';
+import { prismaAdapter } from 'better-auth/adapters/prisma';
+import { prismaClient } from '~/prisma-client';
 
 // noinspection JSUnusedGlobalSymbols
-export const {
-  onRequest,
-  useSession: useSessionLoader,
-  useSignIn: useSignInAction,
-  useSignOut: useSignOutAction,
-} = QwikAuth$(({ env }) => ({
-  secret: env.get('AUTH_SECRET'),
-  trustHost: true,
-  name: 'auth',
-  adapter: isServer ? PrismaAdapter(prismaClient) : undefined,
-  session: {
-    maxAge: 60 * 60 * 24 * 365, // 1 year
-    updateAge: 60 * 60 * 24 * 10, // 10 days
-  },
-  providers: [
-    GitHub({
-      clientId: env.get('GITHUB_ID'),
-      clientSecret: env.get('GITHUB_SECRET'),
-      allowDangerousEmailAccountLinking: true,
-    }),
-  ],
-}));
+export const { onRequest, useSessionLoader } = BetterAuth$(({ env }) =>
+  betterAuth({
+    secret: env.get('AUTH_SECRET'),
+    database: isServer ? prismaAdapter(prismaClient, { provider: 'postgresql' }) : undefined,
+    session: {
+      updateAge: 10 * 60 * 60 * 24, // 10 days
+      expiresIn: 365 * 60 * 60 * 24, // 365 days
+      storeSessionInDatabase: true,
+    },
+    socialProviders: {
+      github: {
+        clientId: env.get('GITHUB_ID')!,
+        clientSecret: env.get('GITHUB_SECRET'),
+      },
+    },
+  }),
+);

@@ -1,0 +1,96 @@
+/*
+  Warnings:
+
+  - The primary key for the `Account` table will be changed. If it partially fails, the table could be left without primary key constraint.
+  - You are about to drop the column `access_token` on the `Account` table. All the data in the column will be lost.
+  - You are about to drop the column `expires_at` on the `Account` table. All the data in the column will be lost.
+  - You are about to drop the column `id_token` on the `Account` table. All the data in the column will be lost.
+  - You are about to drop the column `provider` on the `Account` table. All the data in the column will be lost.
+  - You are about to drop the column `providerAccountId` on the `Account` table. All the data in the column will be lost.
+  - You are about to drop the column `refresh_token` on the `Account` table. All the data in the column will be lost.
+  - You are about to drop the column `session_state` on the `Account` table. All the data in the column will be lost.
+  - You are about to drop the column `token_type` on the `Account` table. All the data in the column will be lost.
+  - You are about to drop the column `type` on the `Account` table. All the data in the column will be lost.
+  - You are about to drop the column `expires` on the `Session` table. All the data in the column will be lost.
+  - You are about to drop the column `sessionToken` on the `Session` table. All the data in the column will be lost.
+  - You are about to drop the `VerificationToken` table. If the table is not empty, all the data it contains will be lost.
+  - A unique constraint covering the columns `[token]` on the table `Session` will be added. If there are existing duplicate values, this will fail.
+  - Added the required column `accountId` to the `Account` table without a default value. This is not possible if the table is not empty.
+  - Added the required column `createdAt` to the `Account` table without a default value. This is not possible if the table is not empty.
+  - Added the required column `id` to the `Account` table without a default value. This is not possible if the table is not empty.
+  - Added the required column `providerId` to the `Account` table without a default value. This is not possible if the table is not empty.
+  - Added the required column `updatedAt` to the `Account` table without a default value. This is not possible if the table is not empty.
+  - Added the required column `createdAt` to the `Session` table without a default value. This is not possible if the table is not empty.
+  - Added the required column `expiresAt` to the `Session` table without a default value. This is not possible if the table is not empty.
+  - Added the required column `id` to the `Session` table without a default value. This is not possible if the table is not empty.
+  - Added the required column `token` to the `Session` table without a default value. This is not possible if the table is not empty.
+  - Added the required column `updatedAt` to the `Session` table without a default value. This is not possible if the table is not empty.
+  - Added the required column `createdAt` to the `User` table without a default value. This is not possible if the table is not empty.
+  - Added the required column `updatedAt` to the `User` table without a default value. This is not possible if the table is not empty.
+  - Made the column `name` on table `User` required. This step will fail if there are existing NULL values in that column.
+  - Added the required column `emailVerified` to the `User` table without a default value. This is not possible if the table is not empty.
+
+*/
+-- DropIndex
+DROP INDEX "public"."Session_sessionToken_key";
+
+-- AlterTable
+ALTER TABLE "Account" DROP CONSTRAINT "Account_pkey",
+DROP COLUMN "access_token",
+DROP COLUMN "expires_at",
+DROP COLUMN "id_token",
+DROP COLUMN "provider",
+DROP COLUMN "providerAccountId",
+DROP COLUMN "refresh_token",
+DROP COLUMN "session_state",
+DROP COLUMN "token_type",
+DROP COLUMN "type",
+ADD COLUMN     "accessToken" TEXT,
+ADD COLUMN     "accessTokenExpiresAt" TIMESTAMP(3),
+ADD COLUMN     "accountId" TEXT NOT NULL,
+ADD COLUMN     "createdAt" TIMESTAMP(3) NOT NULL,
+ADD COLUMN     "id" TEXT NOT NULL,
+ADD COLUMN     "idToken" TEXT,
+ADD COLUMN     "password" TEXT,
+ADD COLUMN     "providerId" TEXT NOT NULL,
+ADD COLUMN     "refreshToken" TEXT,
+ADD COLUMN     "refreshTokenExpiresAt" TIMESTAMP(3),
+ADD COLUMN     "updatedAt" TIMESTAMP(3) NOT NULL,
+ADD CONSTRAINT "Account_pkey" PRIMARY KEY ("id");
+
+-- AlterTable
+ALTER TABLE "Session" DROP COLUMN "expires",
+DROP COLUMN "sessionToken",
+ADD COLUMN     "createdAt" TIMESTAMP(3) NOT NULL,
+ADD COLUMN     "expiresAt" TIMESTAMP(3) NOT NULL,
+ADD COLUMN     "id" TEXT NOT NULL,
+ADD COLUMN     "ipAddress" TEXT,
+ADD COLUMN     "token" TEXT NOT NULL,
+ADD COLUMN     "updatedAt" TIMESTAMP(3) NOT NULL,
+ADD COLUMN     "userAgent" TEXT,
+ADD CONSTRAINT "Session_pkey" PRIMARY KEY ("id");
+
+-- AlterTable
+ALTER TABLE "User" ADD COLUMN     "createdAt" TIMESTAMP(3) NOT NULL,
+ADD COLUMN     "updatedAt" TIMESTAMP(3) NOT NULL,
+ALTER COLUMN "name" SET NOT NULL,
+DROP COLUMN "emailVerified",
+ADD COLUMN     "emailVerified" BOOLEAN NOT NULL;
+
+-- DropTable
+DROP TABLE "public"."VerificationToken";
+
+-- CreateTable
+CREATE TABLE "Verification" (
+    "id" TEXT NOT NULL,
+    "identifier" TEXT NOT NULL,
+    "value" TEXT NOT NULL,
+    "expiresAt" TIMESTAMP(3) NOT NULL,
+    "createdAt" TIMESTAMP(3),
+    "updatedAt" TIMESTAMP(3),
+
+    CONSTRAINT "Verification_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Session_token_key" ON "Session"("token");

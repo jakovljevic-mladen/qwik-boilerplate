@@ -1,19 +1,20 @@
 import { component$ } from '@builder.io/qwik';
-import { useSessionLoader, useSignInAction, useSignOutAction } from '~/routes/plugin@auth';
+import { useSessionLoader } from '~/routes/plugin@auth';
 import Button from '~/components/ui/Button/Button';
+import { createAuthClient } from 'better-auth/client';
+
+export const authClient = createAuthClient();
 
 export default component$(() => {
   const session = useSessionLoader();
-  const signIn = useSignInAction();
-  const signOut = useSignOutAction();
 
   return (
     <Button
       onClick$={() => {
         if (session.value) {
-          signOut.submit({ redirectTo: '/' });
+          authClient.signOut();
         } else {
-          signIn.submit({ providerId: 'github' });
+          authClient.signIn.social({ provider: 'github' });
         }
       }}>
       {session.value ? 'Logout' : 'Login'}
